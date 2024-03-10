@@ -17,7 +17,6 @@
         .gif {
             max-width: 100%;
             height: auto;
-
         }
 
         .button {
@@ -31,6 +30,13 @@
             cursor: pointer;
         }
 
+        .gif {
+            max-width: 100%;
+            height: 200px;
+            /* Adjust this value to your desired height */
+        }
+
+
         .question-button {
             display: inline-block;
             margin: 10px;
@@ -41,15 +47,12 @@
             font-size: 20px;
             cursor: pointer;
             align-items: center;
-
         }
-
 
         h1,
         h3,
         h2 {
             font-family: 'Noto Sans Thai', sans-serif;
-
         }
 
         p {
@@ -71,11 +74,11 @@
 
         @keyframes noButtonMove {
             0% {
-                transform: translate(-1000px, px);
+                transform: translate(-500px, 0);
             }
 
             25% {
-                transform: translate(30px, -500px);
+                transform: translate(30px, -100px);
             }
 
             50% {
@@ -91,112 +94,165 @@
             }
         }
 
-        /* Added a new class for the message container */
-
-
-        /* Added a new class for the message content */
         .message-content {
+            align-items: center;
             background-color: white;
             padding: 50px;
             border-radius: 10px;
             position: relative;
         }
+
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            top: -1vh;
+            transform: translateY(0);
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(0vh) translateX(-10vw);
+            }
+
+            to {
+                transform: translateY(105vh) translateX(10vw);
+            }
+        }
     </style>
 </head>
 
 <body>
-    <h1>HI Babe &#129402</h1>
-    <p> Message For Your Love</p>
-    <img src="https://i.ibb.co/Dp7B59W/pngegg.png" alt="Apology GIF" height="400">
-    <br>
-    <button class="question-button" id="question-button">?</button>
-    <p>click here</p>
-    <div id="question" style="display: none;">
-        <h1>I'm Sorry Babe</h1>
-        <h3>Can you forgive me?</h3>
+    <div id="hello-message-container" class="message-container">
+        <h1>เค้าขอโทษน้า</h1>
+        <img class="gif1" src="https://media.giphy.com/media/dIsQjjXQ1YAbjV2opK/giphy.gif" alt="Can you forgive me?"
+            height="150">
+        <br>
+        <img src="https://i.ibb.co/Dp7B59W/pngegg.png" alt="Apology GIF" height="400">
+        <br>
+        <button class="question-button" id="question-button">?</button>
+
+    </div>
+
+    <div id="sorry-message-container" class="message-container" style="display: none;">
+        <h1></h1>
+        <h2>หายงอนได้แล้วน้า <br> เค้่าคิดถึง..</h2>
         <img class="gif1"
             src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWVxcms3Y2lraXd5YXdzdGZlb3g3bTNsNDYyZ2N6bG1qOXg4ZHR2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/K6WIhJ07gwGkIAQfwN/giphy.gif"
-            alt="Can you forgive me?">
-        <h2>เค้าขอโทษ ยกโทษให้เค้าน้าTT</h2>
+            alt="Can you forgive me?" height="200">
+        <h2>ดีกันน้า</h2>
         <br>
         <button class="button yes-button" id="yes-button">YES</button>
         <button class="button no-button" id="no-button">NO</button>
     </div>
 
     <script>
-        const questionButton = document.getElementById('question-button');
-        const questionDiv = document.getElementById('question');
-        const yesButton = document.getElementById('yes-button');
-        const noButton = document.getElementById('no-button');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select the 'NO' and 'YES' buttons
+            const noButton = document.getElementById('no-button');
+            const yesButton = document.getElementById('yes-button');
+            let loveMessageContainer; // Declare loveMessageContainer variable outside the event listener
+            let forgivenessMessageContainer; // Declare forgivenessMessageContainer variable outside the event listener
 
-        questionButton.addEventListener('click', () => {
-            questionDiv.style.display = 'block';
-        });
-
-        /* Created a new message container */
-        const forgivenessMessageContainer = document.createElement('div');
-        forgivenessMessageContainer.classList.add('message-container');
-        const forgivenessMessageContent = document.createElement('div');
-        forgivenessMessageContent.classList.add('message-content');
-        forgivenessMessageContent.innerHTML = '<h1>ดีกันน้า <br>เค้าขอโทษ </h1><img class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWVxcms3Y2lraXd5YXdzdGZlb3g3bTNsNDYyZ2N6bG1pOXg4ZHR2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/K6WIhJ07gwGkIAQfwN/giphy.gif">';
-        forgivenessMessageContainer.appendChild(forgivenessMessageContent);
-        document.body.appendChild(forgivenessMessageContainer);
-
-        const loveMessageContainer = document.createElement('div');
-        loveMessageContainer.classList.add('message-container');
-        const loveMessageContent = document.createElement('div');
-        loveMessageContent.classList.add('message-content');
-        loveMessageContent.innerHTML = '<h1>ที่รักน่ารักที่สุดเลย</h1><img class="gif" src="https://media.giphy.com/media/ki0mmQmQPVn0IyWbh8/giphy.gif">';
-        loveMessageContainer.appendChild(loveMessageContent);
-        document.body.appendChild(loveMessageContainer);
-
-        noButton.addEventListener('click', () => {
-            forgivenessMessageContainer.style.display = 'flex';
-            setTimeout(() => {
-                forgivenessMessageContainer.style.display = 'none';
-            }, 2000); // hide the message container after 3 seconds
-        });
-
-        yesButton.addEventListener('click', () => {
-            loveMessageContainer.style.display = 'flex';
-        });
-
-        /* Added a function to gradually extend the message container to full screen */
-        function extendToFullScreen(messageContainer) {
-            const messageContent = messageContainer.querySelector('.message-content');
-            const finalize = () => {
-                messageContainer.style.display = 'flex';
-                messageContainer.style.animation = 'extendToFullScreen 2s ease-out forwards';
-            };
-            messageContainer.style.animation = 'none';
-            messageContainer.style.width = '0';
-            messageContainer.style.height = '0';
-            messageContainer.style.opacity = '0';
-            messageContainer.style.pointerEvents = 'none';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    messageContent.style.width = '100%';
-                    messageContent.style.height = '100%';
-                    requestAnimationFrame(() => {
-                        messageContainer.style.width = '100%';
-                        messageContainer.style.height = '100%';
-                        messageContainer.style.opacity = '1';
-                        messageContainer.style.pointerEvents = 'auto';
-                        setTimeout(finalize, 10);
-                    });
-                });
+            document.getElementById('question-button').addEventListener('click', function () {
+                document.getElementById('hello-message-container').style.display = 'none';
+                document.getElementById('sorry-message-container').style.display = 'block';
             });
-        }
-        /* Called the extendToFullScreen function when the yes button is clicked */
-        yesButton.addEventListener('click', () => {
-            extendToFullScreen(loveMessageContainer);
-        });
 
-        /* Called the extendToFullScreen function when the no button is clicked */
-        noButton.addEventListener('click', () => {
-            extendToFullScreen(forgivenessMessageContainer);
+            noButton.addEventListener('click', () => {
+                // Hide love message container if it's visible
+                if (loveMessageContainer) {
+                    loveMessageContainer.style.display = 'none';
+                }
+                document.getElementById('sorry-message-container').style.display = 'none';
+
+                // Show forgiveness message container
+                forgivenessMessageContainer = document.createElement('div');
+                forgivenessMessageContainer.classList.add('message-container');
+                const forgivenessMessageContent = document.createElement('div');
+                forgivenessMessageContent.classList.add('message-content');
+                forgivenessMessageContent.innerHTML = '<h1>ดีกันน้า <br>เค้าขอโทษ </h1><img class="gif" src="https://media.giphy.com/media/k1kPh594Ij3BhqNf91/giphy.gif">';
+                forgivenessMessageContainer.appendChild(forgivenessMessageContent);
+
+                // Create YES button
+                const yesButton = document.createElement('button');
+                yesButton.classList.add('button', 'yes-button');
+                yesButton.textContent = 'YES';
+                yesButton.addEventListener('click', () => {
+                    // Hide forgiveness message container if it's visible
+                    if (forgivenessMessageContainer) {
+                        forgivenessMessageContainer.style.display = 'none';
+                    }
+                    document.getElementById('sorry-message-container').style.display = 'none';
+                    // Show love message container
+                    loveMessageContainer = document.createElement('div');
+                    loveMessageContainer.classList.add('message-container');
+                    const loveMessageContent = document.createElement('div');
+                    loveMessageContent.classList.add('message-content');
+                    loveMessageContent.innerHTML = '<h1>ที่รักน่ารักที่สุดเลย</h1><img class="gif" src="https://media.giphy.com/media/ki0mmQmQPVn0IyWbh8/giphy.gif">';
+                    loveMessageContainer.appendChild(loveMessageContent);
+                    document.body.appendChild(loveMessageContainer);
+                });
+
+                // Create NO button
+                const noButton = document.createElement('button');
+                noButton.classList.add('button', 'no-button');
+                noButton.textContent = 'NO';
+                noButton.addEventListener('click', () => {
+                    // Hide forgiveness message container if it's visible
+                    forgivenessMessageContainer.style.display = 'none';
+
+                    // Show sorry message container again
+                    document.getElementById('sorry-message-container').style.display = 'block';
+                });
+
+                // Append buttons to the forgiveness message container
+                forgivenessMessageContainer.appendChild(yesButton);
+                forgivenessMessageContainer.appendChild(noButton);
+
+                // Append the forgiveness message container to the document body
+                document.body.appendChild(forgivenessMessageContainer);
+
+            });
+
+
+            // Event listener for 'YES' button
+            yesButton.addEventListener('click', () => {
+                // Hide forgiveness message container if it's visible
+                if (forgivenessMessageContainer) {
+                    forgivenessMessageContainer.style.display = 'none';
+                }
+                document.getElementById('sorry-message-container').style.display = 'none';
+                // Show love message container
+                loveMessageContainer = document.createElement('div');
+                loveMessageContainer.classList.add('message-container');
+                const loveMessageContent = document.createElement('div');
+                loveMessageContent.classList.add('message-content');
+                loveMessageContent.innerHTML = '<h1>ดีกันแล้วหันมาจุ๊บ1ที</h1><img class="gif" src="https://media.giphy.com/media/xZn6QSIyPKNpaTbGa2/giphy.gif">';
+                loveMessageContainer.appendChild(loveMessageContent);
+                document.body.appendChild(loveMessageContainer);
+                function createHeart() {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+
+                    heart.style.left = Math.random() * 100 + "vw";
+                    heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+
+                    heart.innerText = '💗';
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }
+
+                setInterval(createHeart, 300);
+            });
         });
     </script>
+
+
 
 </body>
 
